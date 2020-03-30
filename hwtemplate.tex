@@ -1,0 +1,161 @@
+%\RequirePackage[l2tabu,orthodox]{nag}
+\documentclass[]{article}
+\usepackage[makeindex]{imakeidx}\makeindex
+\usepackage[rightcaption]{sidecap}
+\usepackage{graphicx}
+\bibliographystyle{apalike}
+
+\usepackage{algorithm}
+\usepackage[noend]{algpseudocode}
+\usepackage{amssymb,bm}
+%===MATHTIME PROFESSIONAL FONTS===
+\usepackage[T1]{fontenc}
+\usepackage{textcomp}
+\renewcommand{\rmdefault}{ptm}
+%\usepackage[scaled=0.92]{helvet}
+%\usepackage[subscriptcorrection,nofontinfo,mtpcal,mtpscr,mtphrb,slantedGreek]{mtpro2}\renewcommand{\mathbf}[1]{\mathbold{#1}}
+\usepackage[notrig]{physics}\DeclareDocumentCommand\variation{ o g d()}{\IfNoValueTF{#2}{\IfNoValueTF{#3}{\updelta\IfNoValueTF{#1}{}{^{#1}}}{\mathinner{\updelta\IfNoValueTF{#1}{}{^{#1}}\argopen(#3\argclose)}}}{\mathinner{\updelta\IfNoValueTF{#1}{}{^{#1}}#2}\IfNoValueTF{#3}{}{(#3)}}}\DeclareDocumentCommand\Var{ o g d()}{\IfNoValueTF{#2}{\IfNoValueTF{#3}{\upDelta\IfNoValueTF{#1}{}{^{#1}}}{\mathinner{\upDelta\IfNoValueTF{#1}{}{^{#1}}\argopen(#3\argclose)}}}{\mathinner{\upDelta\IfNoValueTF{#1}{}{^{#1}}#2}\IfNoValueTF{#3}{}{(#3)}}}\DeclareDocumentCommand\Fdv{ s o m g d() }{\IfBooleanTF{#1}{\let\fractype\flatfrac}{\let\fractype\frac}\IfNoValueTF{#4}{\IfNoValueTF{#5}{\fractype{\Var\IfNoValueTF{#2}{}{^{#2}}}{\Var #3\IfNoValueTF{#2}{}{^{#2}}}}{\fractype{\Var \IfNoValueTF{#2}{}{^{#2}}}{\Var #3\IfNoValueTF{#2}{}{^{#2}}} \argopen(#5\argclose)}}{\fractype{\Var \IfNoValueTF{#2}{}{^{#2}} #3}{\Var #4\IfNoValueTF{#2}{}{^{#2}}}}}
+\usepackage[colorlinks=true,linkcolor=RubineRed,citecolor=Turquoise,filecolor=BurntOrange,urlcolor=RoyalPurple]{hyperref}
+\usepackage[numbered]{bookmark}
+\usepackage[usenames,dvipsnames]{color}\usepackage[table]{xcolor}
+\usepackage{graphicx,amsmath,amsfonts,amsthm,esint,fullpage,multicol,multirow,stmaryrd,tocloft,mdframed,wrapfig,array,tabularx,enumerate,mathrsfs,cancel,tikz,url,capt-of,subcaption,mathtools,microtype,tabulary,booktabs,xparse,authblk,longtable,tabu,colortbl,tablefootnote,enumitem}
+\newcommand{\jump}[1]{\left\llbracket{#1}\right\rrbracket}\newcommand{\keyword}[1]{\textbf{\emph{#1}}\index{#1}}
+\setlength{\LTpre}{0pt}\setlength{\LTpost}{0pt} %Longtable space removal
+\usepackage{listings}\lstset{language=C++,basicstyle=\ttfamily,keywordstyle=\color{NavyBlue}\ttfamily,stringstyle=\color{orange}\ttfamily,commentstyle=\color{green}\ttfamily,morecomment=[l][\color{red}]{\#},showspaces=false,showstringspaces=false,showtabs=false,breaklines=true,tabsize=3}
+%Usual business with book formatting begins here... -------------------------------------
+
+%===STUFF TO SET UP THEOREM ENVIRONMENTS===
+\newtheorem{theorem}{Theorem}[section]\newtheorem*{theorem*}{Theorem}
+\newtheorem{lemma}{Lemma}[section]\newtheorem*{lemma*}{Lemma}
+\newtheorem{proposition}{Proposition}[section]\newtheorem{proposition*}{Proposition}
+\newtheorem{corollary}{Corollary}[section]\newtheorem*{corollary*}{Corollary}
+\newtheorem{claim}{Claim}[section]\newtheorem*{claim*}{Claim}
+\newtheoremstyle{standard}{1.25pt}{0pt}{}{}{\bfseries}{}{\labelsep}{}
+\theoremstyle{standard}\newtheorem{definition}{Definition}[section]\newtheorem*{definition*}{Definition}
+\theoremstyle{standard}\newtheorem{remark}{Remark}[section]\newtheorem*{remark*}{Remark}
+\theoremstyle{standard}\newtheorem{result}{Result}[section]\newtheorem*{result*}{Result}
+%\theoremstyle{standard}\newtheorem{aside}{Aside}[section]\newtheorem*{aside*}{Aside}\newtheorem{algorithm}{Algorithm}[section]\newtheorem*{algorithm*}{Algorithm}
+\theoremstyle{standard}\newtheorem{example}{Example}[section]\newtheorem*{example*}{Example}
+\theoremstyle{standard}\newtheorem{problem}{Problem}[section]\newtheorem*{problem*}{Problem}
+\makeatletter\def\@endtheorem{\qed\endtrivlist\@endpefalse}\makeatother\theoremstyle{standard}\newtheorem{solution}{Solution}[section]\newtheorem*{solution*}{Solution}
+
+%===CIRCLED NUMBERS COMMAND===
+\newcommand*\circled[1]{\tikz[baseline=(char.base)]{\node[shape=circle,draw,inner sep=2pt] (char) {#1};}}
+
+%===SET UP FRAMED ENVIRONMENT STANDARDS===
+\mdfsetup{frametitlealignment=\center} %Centers frame titles
+\newmdenv[linewidth=1,linecolor=black!30,backgroundcolor=black!5]{FramedExample} %Define a new standard environment for examples.
+
+\newmdenv[linewidth=1,linecolor=black!30]{Framed}
+\newmdenv[linewidth=1,linecolor=black!30,innertopmargin=0\baselineskip]{FramedTheorem}
+\newmdenv[linewidth=1,linecolor=black!30,innertopmargin=-0.5\baselineskip]{FramedGroup}
+
+\newmdenv[linewidth=1,linecolor=Cerulean,backgroundcolor=cyan!5]{Framed1}
+\newmdenv[linewidth=1,linecolor=Cerulean,backgroundcolor=cyan!5,innertopmargin=0\baselineskip]{Framed1Theorem}
+\newmdenv[linewidth=1,linecolor=Cerulean,backgroundcolor=cyan!5,innertopmargin=-0.5\baselineskip]{Framed1Group}
+
+\newmdenv[linewidth=1,linecolor=Orchid,backgroundcolor=magenta!5]{Framed2}
+\newmdenv[linewidth=1,linecolor=Orchid,backgroundcolor=magenta!5,innertopmargin=0\baselineskip]{Framed2Theorem}
+\newmdenv[linewidth=1,linecolor=Orchid,backgroundcolor=magenta!5,innertopmargin=-0.5\baselineskip]{Framed2Group}
+
+\newmdenv[linewidth=1,linecolor=LimeGreen,backgroundcolor=green!5]{Framed3}
+\newmdenv[linewidth=1,linecolor=LimeGreen,backgroundcolor=green!5,innertopmargin=0\baselineskip]{Framed3Theorem}
+\newmdenv[linewidth=1,linecolor=LimeGreen,backgroundcolor=green!5,innertopmargin=-0.5\baselineskip]{Framed3Group}
+
+\newmdenv[linewidth=1,linecolor=Yellow,backgroundcolor=yellow!8]{Framed4}
+\newmdenv[linewidth=1,linecolor=Yellow,backgroundcolor=yellow!8,innertopmargin=0\baselineskip]{Framed4Theorem}
+\newmdenv[linewidth=1,linecolor=Yellow,backgroundcolor=yellow!8,innertopmargin=-0.5\baselineskip]{Framed4Group}
+
+\newmdenv[linewidth=1,linecolor=YellowOrange,backgroundcolor=orange!5]{Framed5}
+\newmdenv[linewidth=1,linecolor=YellowOrange,backgroundcolor=orange!5,innertopmargin=0\baselineskip]{Framed5Theorem}
+\newmdenv[linewidth=1,linecolor=YellowOrange,backgroundcolor=orange!5,innertopmargin=-0.5\baselineskip]{Framed5Group}
+
+\newmdenv[linewidth=1,linecolor=WildStrawberry,backgroundcolor=red!5]{Framed6}
+\newmdenv[linewidth=1,linecolor=WildStrawberry,backgroundcolor=red!5,innertopmargin=0\baselineskip]{Framed6Theorem}
+\newmdenv[linewidth=1,linecolor=WildStrawberry,backgroundcolor=red!5,innertopmargin=-0.5\baselineskip]{Framed6Group}
+%Six color tiers which will be used to indicate importance of results in this text.
+
+%===MULTICOLUMN FIGURES===
+\newenvironment{Figure}
+  {\par\medskip\noindent\minipage{\linewidth}}
+  {\endminipage\par\medskip}
+
+%===REPORT EQUATION NUMBERING===
+\numberwithin{equation}{section} %Equation numbering with sections.
+\usepackage{cleveref}
+%Ending of the standard setup...---------------------------------------------------------
+
+% page counting, header/footer
+\usepackage{fancyhdr}
+\usepackage{float}
+\renewcommand{\thispagestyle}[1]{} % Header on first page
+\pagestyle{fancy}
+\lhead{ACM 127 \\ Homework 0}
+\cfoot{\thepage}
+\rhead{K. Bhattacharya \\ California Institute of Technology}
+\renewcommand{\headheight}{23pt}
+\renewcommand{\footrulewidth}{0.4pt}
+\headsep=10pt
+
+% 
+\usepackage{titling}
+\renewcommand\maketitlehooka{\null\mbox{}\vfill}
+\renewcommand\maketitlehookd{\vfill\null}
+%opening
+\title{AM/ACM 127: Calculus of Variations\\ \large{Homework 0} \\ \large{Assigned: Monday, March 30, 2020} \\ \large{\textbf{Due: Tuesday, April 7, 2020, 11:59 PM, on Gradescope}}}
+\author{ 
+	     }
+	     \date{}
+
+% =================================================================================================
+% Macro definitions
+\makeatletter
+\def\BState{\State\hskip-\ALG@thistlm}
+\makeatother
+\def\hm{\frac{\hbar^2}{2m}}
+\def\pdt{\frac{\partial}{\partial t}}
+\def\spd{\frac{\partial^2}{\partial x^2}}
+\def\ih{i\hbar}
+\def\Ha{\hat{H}}
+\def\mps{\|\Psi\|^2}
+\def\mbf{\mathbf}
+\def\rg{\rho_{\gamma}}
+\def\rR{\mathbf{r} ,\mathbf{R}_{J}}
+\newcommand{\bsym}[1]{\boldsymbol{ #1 }} 
+
+
+
+% =================================================================================================
+
+\begin{document}
+\maketitle
+\textbf{Rules}
+\begin{enumerate}
+\item You are welcome to discuss the homework problems with each other as well as with the teaching assistant/instructor; however, you should only submit your own work that reflects your understanding of the problems.
+\item Some of the problems are taken from the textbook and have solutions at the end of the book. You should not consult the solutions.
+\item No late homework will be accepted except (i) in the case of genuine documented emergencies or (ii) permission of the instructor at least one week before the due date.
+\item Ensure that scans of your homework are legible. Submissions that cannot be read will receive no points.
+\end{enumerate}
+\newpage
+
+\section*{Problem 1 (5 points).}
+
+
+
+\noindent
+\hrulefill
+
+\section*{Problem 2 (5 points).}
+
+
+
+\noindent
+\hrulefill
+
+
+\section*{Problem 3 (5 points).}
+
+
+\noindent
+\hrulefill
+\end{document}
